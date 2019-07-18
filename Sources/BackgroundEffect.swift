@@ -33,7 +33,7 @@ public final class ShadowEffect: NSObject, BackgroundEffect {
     public var target: BackgroundTarget = .targetViewController
 
     @objc(defaultShadowEffedt)
-    public static let `default`: ShadowEffect = ShadowEffect(color: .black, alpha: 0.8)
+    public static let `default`: ShadowEffect = ShadowEffect(color: .white, alpha: 1.0)
     
     public init(color: UIColor?, alpha: CGFloat) {
         self.color = color
