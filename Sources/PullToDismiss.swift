@@ -169,10 +169,11 @@ open class PullToDismiss: NSObject {
 
     fileprivate func updateViewPosition(offset: CGFloat) {
         var addOffset: CGFloat = offset
-        // avoid statusbar gone
-        if viewPositionY >= 0 && viewPositionY < 0.05 {
-            addOffset = min(max(-0.01, addOffset), 0.01)
+        // 스크롤 후 dismiss 시 끊기는 오류 수정
+        if viewPositionY >= 0 && viewPositionY < 0.005 {
+            addOffset = min(max(-0.001, addOffset), 0.001)
         }
+        
         viewPositionY += addOffset
         targetViewController?.view.frame.origin.y = max(0.0, viewPositionY)
         if case .some(.targetViewController) = backgroundEffect?.target {
