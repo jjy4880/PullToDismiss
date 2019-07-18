@@ -16,7 +16,7 @@ open class PullToDismiss: NSObject {
         public static let dismissableHeightPercentage: CGFloat = 0.33
     }
 
-    open var backgroundEffect: BackgroundEffect? = ShadowEffect.default
+    open var backgroundEffect: BackgroundEffect? = ShadowEffect(color: .white, alpha: 1.0)
     open var edgeShadow: EdgeShadow? = EdgeShadow.default
 
     public var dismissAction: (() -> Void)?
