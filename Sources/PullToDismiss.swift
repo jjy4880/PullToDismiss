@@ -52,20 +52,22 @@ open class PullToDismiss: NSObject {
     private var backgroundView: UIView?
     private var navigationBarHeight: CGFloat = 0.0
     private var blurSaturationDeltaFactor: CGFloat = 1.8
-    convenience public init?(scrollView: UIScrollView) {
+    convenience public init?(scrollView: UIScrollView, delegate: UIScrollViewDelegate? = nil, dismissHandler: (() -> Void)? = nil) {
         guard let viewController = type(of: self).viewControllerFromScrollView(scrollView) else {
             print("a scrollView must be on the view controller.")
             return nil
         }
-        self.init(scrollView: scrollView, viewController: viewController)
+        self.init(scrollView: scrollView, viewController: viewController, delegate: delegate, dismissHandler: dismissHandler )
     }
 
-    public init(scrollView: UIScrollView, viewController: UIViewController, navigationBar: UIView? = nil) {
+    public init(scrollView: UIScrollView, viewController: UIViewController, navigationBar: UIView? = nil, delegate: UIScrollViewDelegate? = nil, dismissHandler: (() -> Void)? = nil) {
         super.init()
         self.proxy = ScrollViewDelegateProxy(delegates: [self])
         self.__scrollView = scrollView
         self.__scrollView?.delegate = self.proxy
         self.viewController = viewController
+        self.delegate = delegate
+        self.dismissAction = dismissHandler
         
 //        if let navigationBar = navigationBar ?? viewController.navigationController?.navigationBar {
 //            let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
